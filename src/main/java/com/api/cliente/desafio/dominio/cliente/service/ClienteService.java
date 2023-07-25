@@ -1,7 +1,6 @@
 package com.api.cliente.desafio.dominio.cliente.service;
 
 import com.api.cliente.desafio.dominio.cliente.dto.ClienteRequestDTO;
-import com.api.cliente.desafio.dominio.cliente.dto.ClienteResponseDTO;
 import com.api.cliente.desafio.dominio.cliente.entity.Cliente;
 import com.api.cliente.desafio.dominio.cliente.repository.IClienteRepository;
 import com.api.cliente.desafio.dominio.cliente.service.exception.ControllerNotFoundException;
@@ -23,28 +22,26 @@ public class ClienteService {
     @Autowired
     private IClienteRepository repo;
 
-    public Page<ClienteResponseDTO> findAll(PageRequest pagina) {
+    public Page<Cliente> findAll(PageRequest pagina) {
         var clientes = repo.findAll(pagina);
-        return clientes.map(cliente -> new ClienteResponseDTO(cliente));
+        return clientes;
     }
 
-    public ClienteResponseDTO findById(UUID id) {
-        var cliente = repo.findById(id).orElseThrow(() -> new ControllerNotFoundException("Cliente não encontrado"));
-        return new ClienteResponseDTO(cliente);
+    public Cliente findById(UUID id) {
+        return repo.findById(id).orElseThrow(() -> new ControllerNotFoundException("Cliente não encontrado"));
     }
 
-    public ClienteResponseDTO save (ClienteRequestDTO requestDTO) {
+    public Cliente save (ClienteRequestDTO requestDTO) {
         Cliente cliente = new Cliente();
         cliente.setRazaoSocial(requestDTO.getRazaoSocial());
         cliente.setTelefone(requestDTO.getTelefone());
         cliente.setEndereco(requestDTO.getEndereco());
         cliente.setFaturamentoDeclarado(BigDecimal.valueOf(requestDTO.getFaturamentoDeclarado()));
         cliente.setDadosBancarios(requestDTO.getDadosBancarios());
-        var clienteSalvo = repo.save(cliente);
-        return new ClienteResponseDTO(clienteSalvo);
+        return repo.save(cliente);
     }
 
-    public ClienteResponseDTO update(UUID id, ClienteRequestDTO requestDTO) {
+    public Cliente update(UUID id, ClienteRequestDTO requestDTO) {
         try {
             Cliente clienteEncontrado = repo.getOne(id);
             clienteEncontrado.setRazaoSocial(requestDTO.getRazaoSocial());
@@ -52,8 +49,7 @@ public class ClienteService {
             clienteEncontrado.setEndereco(requestDTO.getEndereco());
             clienteEncontrado.setFaturamentoDeclarado(BigDecimal.valueOf(requestDTO.getFaturamentoDeclarado()));
             clienteEncontrado.setDadosBancarios(requestDTO.getDadosBancarios());
-            var clienteSalvo = repo.save(clienteEncontrado);
-            return new ClienteResponseDTO(clienteSalvo);
+            return repo.save(clienteEncontrado);
 
         } catch (EntityNotFoundException e) {
             throw new ControllerNotFoundException("Cliente nao encontrado, id: " + id);

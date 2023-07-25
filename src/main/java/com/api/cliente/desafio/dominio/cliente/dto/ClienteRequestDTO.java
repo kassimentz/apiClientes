@@ -2,9 +2,7 @@ package com.api.cliente.desafio.dominio.cliente.dto;
 
 import com.api.cliente.desafio.dominio.cliente.entity.Cliente;
 import com.api.cliente.desafio.dominio.cliente.entity.DadosBancarios;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package com.api.cliente.desafio.dominio.cliente.service;
 
 import com.api.cliente.desafio.dominio.cliente.dto.ClienteRequestDTO;
-import com.api.cliente.desafio.dominio.cliente.dto.ClienteResponseDTO;
 import com.api.cliente.desafio.dominio.cliente.entity.Cliente;
 import com.api.cliente.desafio.dominio.cliente.repository.IClienteRepository;
 import com.api.cliente.desafio.dominio.cliente.service.exception.ControllerNotFoundException;
@@ -22,8 +21,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 class ClienteServiceTest {
@@ -61,14 +58,14 @@ class ClienteServiceTest {
 
     @Test
     public void findAllDeveRetornarUmaListaDeClientesResponseDTO() {
-        Page clienteResponseDTO = service.findAll(pageRequest);
-        Assertions.assertNotNull(clienteResponseDTO);
+        Page response = service.findAll(pageRequest);
+        Assertions.assertNotNull(response);
     }
 
     @Test
     public void findByIdDeveRetornarUmClienteResponseDTOAoBuscarPorID() {
-        ClienteResponseDTO clienteResponseDTO = service.findById(idExistente);
-        Assertions.assertNotNull(clienteResponseDTO);
+        Cliente cliente = service.findById(idExistente);
+        Assertions.assertNotNull(cliente);
     }
 
     @Test
@@ -82,7 +79,7 @@ class ClienteServiceTest {
     public void updateDeveAtualizarARazaoSocial() {
         Assertions.assertEquals("Cliente Um", cliente.getRazaoSocial());
         service.update(idExistente, clienteRazaoSocialAtualizada);
-        ClienteResponseDTO clienteAtualizado = service.findById(idExistente);
+        Cliente clienteAtualizado = service.findById(idExistente);
         Assertions.assertEquals("Atualizacao razao social do cliente", clienteAtualizado.getRazaoSocial());
     }
 }

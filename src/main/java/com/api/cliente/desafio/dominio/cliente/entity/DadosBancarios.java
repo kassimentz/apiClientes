@@ -1,5 +1,4 @@
 package com.api.cliente.desafio.dominio.cliente.entity;
-
 import jakarta.persistence.*;
 
 import java.util.Objects;

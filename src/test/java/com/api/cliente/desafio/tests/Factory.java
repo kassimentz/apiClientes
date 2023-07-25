@@ -1,7 +1,6 @@
 package com.api.cliente.desafio.tests;
 
 import com.api.cliente.desafio.dominio.cliente.dto.ClienteRequestDTO;
-import com.api.cliente.desafio.dominio.cliente.dto.ClienteResponseDTO;
 import com.api.cliente.desafio.dominio.cliente.entity.Cliente;
 import com.api.cliente.desafio.dominio.cliente.entity.DadosBancarios;
 

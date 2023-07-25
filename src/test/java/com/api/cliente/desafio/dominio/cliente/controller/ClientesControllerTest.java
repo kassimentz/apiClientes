@@ -1,7 +1,6 @@
 package com.api.cliente.desafio.dominio.cliente.controller;
 
-import com.api.cliente.desafio.dominio.cliente.dto.ClienteRequestDTO;
-import com.api.cliente.desafio.dominio.cliente.dto.ClienteResponseDTO;
+import com.api.cliente.desafio.dominio.cliente.entity.Cliente;
 import com.api.cliente.desafio.dominio.cliente.service.ClienteService;
 import com.api.cliente.desafio.tests.Factory;
 import org.junit.jupiter.api.Test;
@@ -29,15 +28,15 @@ class ClientesControllerTest {
     ClienteService clienteService;
 
     @Test
-    public void findByIdDeveRetornarUmClienteResponseDTOCasoIdExista() throws Exception {
+    public void findByIdDeveRetornarUmClienteCasoIdExista() throws Exception {
 
         UUID id = UUID.fromString("879bfe49-d373-49ce-922c-bf4833543353");
 
-        ClienteResponseDTO response = new ClienteResponseDTO();
+        Cliente response = new Cliente();
         response.setRazaoSocial("Razao social");
         response.setTelefone("51-98765435");
         response.setEndereco("Endereco teste");
-        response.setFaturamentoDeclarado(873.00);
+        response.setFaturamentoDeclarado(new BigDecimal(873.00));
         response.setDadosBancarios(Factory.createDadosBancariosList());
         response.setId(id);
 
