@@ -1,6 +1,6 @@
 package com.api.cliente.desafio.dominio.cliente.service;
 
-import com.api.cliente.desafio.dominio.cliente.dto.ClienteRequestDTO;
+import com.api.cliente.desafio.dominio.cliente.dto.ClienteDTO;
 import com.api.cliente.desafio.dominio.cliente.entity.Cliente;
 import com.api.cliente.desafio.dominio.cliente.repository.IClienteRepository;
 import com.api.cliente.desafio.dominio.cliente.service.exception.ControllerNotFoundException;
@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -31,25 +32,28 @@ public class ClienteService {
         return repo.findById(id).orElseThrow(() -> new ControllerNotFoundException("Cliente não encontrado"));
     }
 
-    public Cliente save (ClienteRequestDTO requestDTO) {
+    public Cliente save (ClienteDTO requestDTO) {
         Cliente cliente = new Cliente();
         cliente.setRazaoSocial(requestDTO.getRazaoSocial());
         cliente.setTelefone(requestDTO.getTelefone());
         cliente.setEndereco(requestDTO.getEndereco());
         cliente.setFaturamentoDeclarado(BigDecimal.valueOf(requestDTO.getFaturamentoDeclarado()));
-        cliente.setDadosBancarios(requestDTO.getDadosBancarios());
         return repo.save(cliente);
     }
 
-    public Cliente update(UUID id, ClienteRequestDTO requestDTO) {
+    public Cliente update(UUID id, ClienteDTO requestDTO) {
         try {
-            Cliente clienteEncontrado = repo.getOne(id);
-            clienteEncontrado.setRazaoSocial(requestDTO.getRazaoSocial());
-            clienteEncontrado.setTelefone(requestDTO.getTelefone());
-            clienteEncontrado.setEndereco(requestDTO.getEndereco());
-            clienteEncontrado.setFaturamentoDeclarado(BigDecimal.valueOf(requestDTO.getFaturamentoDeclarado()));
-            clienteEncontrado.setDadosBancarios(requestDTO.getDadosBancarios());
-            return repo.save(clienteEncontrado);
+            Optional<Cliente> clienteOptional = repo.findById(id);
+            if(clienteOptional.isPresent()) {
+                Cliente clienteEncontrado = clienteOptional.get();
+                clienteEncontrado.setRazaoSocial(requestDTO.getRazaoSocial());
+                clienteEncontrado.setTelefone(requestDTO.getTelefone());
+                clienteEncontrado.setEndereco(requestDTO.getEndereco());
+                clienteEncontrado.setFaturamentoDeclarado(BigDecimal.valueOf(requestDTO.getFaturamentoDeclarado()));
+                return repo.save(clienteEncontrado);
+            } else {
+                throw new ControllerNotFoundException("Cliente nao encontrado, id: " + id);
+            }
 
         } catch (EntityNotFoundException e) {
             throw new ControllerNotFoundException("Cliente nao encontrado, id: " + id);

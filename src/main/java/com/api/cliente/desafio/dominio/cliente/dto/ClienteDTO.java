@@ -6,7 +6,7 @@ import jakarta.validation.constraints.*;
 
 import java.util.List;
 
-public class ClienteRequestDTO {
+public class ClienteDTO {
 
     @NotBlank(message = "Razão Social deve ser informado")
     private String razaoSocial;
@@ -17,37 +17,34 @@ public class ClienteRequestDTO {
     @NotBlank(message = "Endereço deve ser informado")
     private String endereco;
 
-//    @NotBlank(message = "Faturamento declarado deve ser informado")
-//    @DecimalMin(value = "0.01", message = "O valor mínimo é 0.01")
-//    @Digits(integer = 14, fraction = 2, message = "Formato inválido. Use até 14 dígitos inteiros e 2 decimais.")
+    @NotNull(message = "Faturamento declarado deve ser informado")
+    @DecimalMin(value = "0.01", message = "O valor mínimo é 0.01")
+    @Digits(integer = 14, fraction = 2, message = "Formato inválido. Use até 14 dígitos inteiros e 2 decimais.")
     private double faturamentoDeclarado;
 
-    private List<DadosBancarios> dadosBancarios;
 
-    public ClienteRequestDTO() {
+    public ClienteDTO() {
     }
 
-    public ClienteRequestDTO(String razaoSocial, String telefone, String endereco, double faturamentoDeclarado, List<DadosBancarios> dadosBancarios) {
+    public ClienteDTO(String razaoSocial, String telefone, String endereco, double faturamentoDeclarado, List<DadosBancarios> dadosBancarios) {
         this.razaoSocial = razaoSocial;
         this.telefone = telefone;
         this.endereco = endereco;
         this.faturamentoDeclarado = faturamentoDeclarado;
-        this.dadosBancarios = dadosBancarios;
     }
 
-    public ClienteRequestDTO(Cliente entidade) {
+    public ClienteDTO(Cliente entidade) {
         this.razaoSocial = entidade.getRazaoSocial();
         this.telefone = entidade.getTelefone();
         this.endereco = entidade.getEndereco();
         this.faturamentoDeclarado = entidade.getFaturamentoDeclarado().doubleValue();
-        this.dadosBancarios = entidade.getDadosBancarios();
     }
 
     public String getRazaoSocial() {
         return razaoSocial;
     }
 
-    public ClienteRequestDTO setRazaoSocial(String razaoSocial) {
+    public ClienteDTO setRazaoSocial(String razaoSocial) {
         this.razaoSocial = razaoSocial;
         return this;
     }
@@ -56,7 +53,7 @@ public class ClienteRequestDTO {
         return telefone;
     }
 
-    public ClienteRequestDTO setTelefone(String telefone) {
+    public ClienteDTO setTelefone(String telefone) {
         this.telefone = telefone;
         return this;
     }
@@ -65,7 +62,7 @@ public class ClienteRequestDTO {
         return endereco;
     }
 
-    public ClienteRequestDTO setEndereco(String endereco) {
+    public ClienteDTO setEndereco(String endereco) {
         this.endereco = endereco;
         return this;
     }
@@ -74,17 +71,8 @@ public class ClienteRequestDTO {
         return faturamentoDeclarado;
     }
 
-    public ClienteRequestDTO setFaturamentoDeclarado(double faturamentoDeclarado) {
+    public ClienteDTO setFaturamentoDeclarado(double faturamentoDeclarado) {
         this.faturamentoDeclarado = faturamentoDeclarado;
-        return this;
-    }
-
-    public List<DadosBancarios> getDadosBancarios() {
-        return dadosBancarios;
-    }
-
-    public ClienteRequestDTO setDadosBancarios(List<DadosBancarios> dadosBancarios) {
-        this.dadosBancarios = dadosBancarios;
         return this;
     }
 }

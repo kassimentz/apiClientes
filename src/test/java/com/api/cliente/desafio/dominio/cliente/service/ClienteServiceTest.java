@@ -1,6 +1,6 @@
 package com.api.cliente.desafio.dominio.cliente.service;
 
-import com.api.cliente.desafio.dominio.cliente.dto.ClienteRequestDTO;
+import com.api.cliente.desafio.dominio.cliente.dto.ClienteDTO;
 import com.api.cliente.desafio.dominio.cliente.entity.Cliente;
 import com.api.cliente.desafio.dominio.cliente.repository.IClienteRepository;
 import com.api.cliente.desafio.dominio.cliente.service.exception.ControllerNotFoundException;
@@ -39,7 +39,7 @@ class ClienteServiceTest {
 
     private Cliente cliente;
 
-    private ClienteRequestDTO clienteRazaoSocialAtualizada;
+    private ClienteDTO clienteRazaoSocialAtualizada;
 
 
     @BeforeEach
@@ -64,8 +64,8 @@ class ClienteServiceTest {
 
     @Test
     public void findByIdDeveRetornarUmClienteResponseDTOAoBuscarPorID() {
-        Cliente cliente = service.findById(idExistente);
-        Assertions.assertNotNull(cliente);
+        Cliente clienteEncontrado = service.findById(idExistente);
+        Assertions.assertNotNull(clienteEncontrado);
     }
 
     @Test

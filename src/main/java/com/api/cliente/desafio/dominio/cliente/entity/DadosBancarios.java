@@ -1,9 +1,15 @@
 package com.api.cliente.desafio.dominio.cliente.entity;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.Objects;
 import java.util.UUID;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 @Table(name="tb_dados_bancarios")
 public class DadosBancarios {
@@ -17,6 +23,7 @@ public class DadosBancarios {
 
     private String banco;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

@@ -1,6 +1,7 @@
 package com.api.cliente.desafio.dominio.cliente.controller;
 
-import com.api.cliente.desafio.dominio.cliente.dto.ClienteRequestDTO;
+import com.api.cliente.desafio.dominio.cliente.dto.ClienteDTO;
+import com.api.cliente.desafio.dominio.cliente.dto.DadosBancariosDTO;
 import com.api.cliente.desafio.dominio.cliente.entity.Cliente;
 import com.api.cliente.desafio.dominio.cliente.entity.DadosBancarios;
 import com.api.cliente.desafio.dominio.cliente.service.ClienteService;
@@ -9,6 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
@@ -45,14 +47,13 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> save(@Valid @RequestBody ClienteRequestDTO cliente) {
+    public ResponseEntity<Cliente> save(@Valid @RequestBody ClienteDTO cliente) {
         var clienteSalvo = clienteService.save(cliente);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(clienteSalvo.getId()).toUri();
-        return ResponseEntity.created(uri).body(clienteSalvo);
+        return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(clienteSalvo);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> update(@RequestBody ClienteRequestDTO cliente, @PathVariable UUID id) {
+    public ResponseEntity<Cliente> update(@RequestBody ClienteDTO cliente, @PathVariable UUID id) {
         var clienteAtualizado = clienteService.update(id, cliente);
         return ResponseEntity.ok(clienteAtualizado);
     }
@@ -63,26 +64,26 @@ public class ClienteController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/{idCliente}/dadosBancarios")
-    public ResponseEntity<DadosBancarios> adicionarDadosBancarios(@PathVariable UUID idCliente, @RequestBody DadosBancarios dadosBancarios) {
+    @PostMapping("/{idCliente}/dados-bancarios")
+    public ResponseEntity<DadosBancarios> adicionarDadosBancarios(@PathVariable UUID idCliente, @RequestBody DadosBancariosDTO dadosBancarios) {
         var dadosBancariosSalvo = dadosBancariosService.save(idCliente, dadosBancarios);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idCliente/dadosBancarios}").buildAndExpand(idCliente).toUri();
         return ResponseEntity.created(uri).body(dadosBancariosSalvo);
     }
 
-    @GetMapping("/{idCliente}/dadosBancarios")
-    public ResponseEntity<List<DadosBancarios>> findDadosBancarios(@PathVariable UUID idCliente) {
-        var dadosBancarios = dadosBancariosService.findDadosBancariosCliente(idCliente);
+    @GetMapping("/{idCliente}/dados-bancarios")
+    public ResponseEntity<List<DadosBancarios>> findAllDadosBancarios(@PathVariable UUID idCliente) {
+        var dadosBancarios = dadosBancariosService.findAllDadosBancariosCliente(idCliente);
         return ResponseEntity.ok(dadosBancarios);
     }
 
-    @GetMapping("/dadosBancarios/{id}")
+    @GetMapping("/{idCliente}/dados-bancarios/{id}")
     public ResponseEntity<DadosBancarios> findDadosBancariosById(@PathVariable UUID id) {
         var dadosBancarios = dadosBancariosService.findById(id);
         return ResponseEntity.ok(dadosBancarios);
     }
 
-    @DeleteMapping("/dadosBancarios/{id}")
+    @DeleteMapping("/{idCliente}/dados-bancarios/{id}")
     public ResponseEntity deleteDadosBancarios(@PathVariable UUID id) {
         dadosBancariosService.deleteDadosBancarios(id);
         return ResponseEntity.noContent().build();

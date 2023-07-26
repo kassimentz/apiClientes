@@ -1,6 +1,7 @@
 package com.api.cliente.desafio.tests;
 
-import com.api.cliente.desafio.dominio.cliente.dto.ClienteRequestDTO;
+import com.api.cliente.desafio.dominio.cliente.dto.ClienteDTO;
+import com.api.cliente.desafio.dominio.cliente.dto.DadosBancariosDTO;
 import com.api.cliente.desafio.dominio.cliente.entity.Cliente;
 import com.api.cliente.desafio.dominio.cliente.entity.DadosBancarios;
 
@@ -10,6 +11,14 @@ import java.util.List;
 
 public class Factory {
 
+    public static DadosBancariosDTO createDadoBancarioDTO() {
+        DadosBancarios dadosBancarios1 = new DadosBancarios.Builder()
+                .agencia("001")
+                .conta("0987-1")
+                .banco("100")
+                .build();
+        return new DadosBancariosDTO(dadosBancarios1);
+    }
     public static List<DadosBancarios> createDadosBancariosList() {
         DadosBancarios dadosBancarios1 = new DadosBancarios.Builder()
                 .agencia("001")
@@ -38,8 +47,8 @@ public class Factory {
         );
     }
 
-    public static ClienteRequestDTO createClienteRequestDTOComRazaoSocialAtualizada() {
-        return new ClienteRequestDTO(createCliente().setRazaoSocial("Atualizacao razao social do cliente"));
+    public static ClienteDTO createClienteRequestDTOComRazaoSocialAtualizada() {
+        return new ClienteDTO(createCliente().setRazaoSocial("Atualizacao razao social do cliente"));
     }
 
 }

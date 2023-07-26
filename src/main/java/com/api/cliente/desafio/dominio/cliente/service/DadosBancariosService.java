@@ -1,5 +1,6 @@
 package com.api.cliente.desafio.dominio.cliente.service;
 
+import com.api.cliente.desafio.dominio.cliente.dto.DadosBancariosDTO;
 import com.api.cliente.desafio.dominio.cliente.entity.Cliente;
 import com.api.cliente.desafio.dominio.cliente.entity.DadosBancarios;
 import com.api.cliente.desafio.dominio.cliente.repository.IDadoBancarioRepository;
@@ -23,7 +24,7 @@ public class DadosBancariosService {
     @Autowired
     private ClienteService clienteService;
 
-    public List<DadosBancarios> findDadosBancariosCliente(UUID idCliente) {
+    public List<DadosBancarios> findAllDadosBancariosCliente(UUID idCliente) {
         return repo.findByClienteId(idCliente);
     }
 
@@ -31,9 +32,16 @@ public class DadosBancariosService {
         return repo.findById(id).orElseThrow(() -> new ControllerNotFoundException("Dados bancarios não encontrado"));
     }
 
-    public DadosBancarios save(UUID idCliente, DadosBancarios dadosBancarios) {
+    public DadosBancarios save(UUID idCliente, DadosBancariosDTO dadosBancariosDTO) {
+
+        DadosBancarios dadosBancarios = new DadosBancarios();
+        dadosBancarios.setAgencia(dadosBancariosDTO.getAgencia());
+        dadosBancarios.setBanco(dadosBancariosDTO.getBanco());
+        dadosBancarios.setConta(dadosBancariosDTO.getConta());
+
         Cliente cliente = clienteService.findById(idCliente);
         cliente.addDadosBancarios(dadosBancarios);
+        dadosBancarios.setCliente(cliente);
         return repo.save(dadosBancarios);
 
     }

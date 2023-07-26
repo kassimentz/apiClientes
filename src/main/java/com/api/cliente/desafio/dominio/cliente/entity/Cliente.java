@@ -1,12 +1,17 @@
 package com.api.cliente.desafio.dominio.cliente.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Immutable;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 @Table(name="tb_cliente")
 public class Cliente {
@@ -22,7 +27,8 @@ public class Cliente {
 
     private BigDecimal faturamentoDeclarado;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<DadosBancarios> dadosBancarios = new ArrayList<>();
 
     public Cliente(String razaoSocial, String telefone, String endereco, BigDecimal faturamentoDeclarado, List<DadosBancarios> dadosBancarios) {
