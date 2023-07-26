@@ -1,0 +1,284 @@
+{
+	"info": {
+		"_postman_id": "95bc5372-4d0b-4c5d-b51d-66954780f35f",
+		"name": "Bhub Client Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "Atualiza Cliente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"razaoSocial\": \"razao social 1 atualizada\",\n    \"telefone\": \"51 999999999\",\n    \"endereco\": \"endereco 1\",\n    \"dataCadastro\": \"2023-07-24T00:00:00\",\n    \"faturamentoDeclarado\": 900.00\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCALHOST}}/clientes/{{idCliente}}",
+							"host": [
+								"{{LOCALHOST}}"
+							],
+							"path": [
+								"clientes",
+								"{{idCliente}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exclui Cliente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"razaoSocial\": \"razao social 1 atualizada\",\n    \"telefone\": \"51 999999999\",\n    \"endereco\": \"endereco 1\",\n    \"dataCadastro\": \"2023-07-24T00:00:00\",\n    \"faturamentoDeclarado\": 900.00\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCALHOST}}/clientes/6063709a-9c13-4ba3-b19c-a3d98edfbabb",
+							"host": [
+								"{{LOCALHOST}}"
+							],
+							"path": [
+								"clientes",
+								"6063709a-9c13-4ba3-b19c-a3d98edfbabb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Salva Cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"razaoSocial\": \"razao social 1\",\n    \"telefone\": \"51 999999999\",\n    \"endereco\": \"endereco 1\",\n    \"faturamentoDeclarado\": 900.00\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCALHOST}}/clientes",
+							"host": [
+								"{{LOCALHOST}}"
+							],
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca Todos Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCALHOST}}/clientes",
+							"host": [
+								"{{LOCALHOST}}"
+							],
+							"path": [
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca Um Cliente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCALHOST}}/clientes/{{idCliente}}",
+							"host": [
+								"{{LOCALHOST}}"
+							],
+							"path": [
+								"clientes",
+								"{{idCliente}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca Dados Bancarios Cliente",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCALHOST}}/clientes/{{idCliente}}/dados-bancarios",
+							"host": [
+								"{{LOCALHOST}}"
+							],
+							"path": [
+								"clientes",
+								"{{idCliente}}",
+								"dados-bancarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca Um Dado Bancario Cliente",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCALHOST}}/clientes/{{idCliente}}/dados-bancarios/{{idDadoBancario}}",
+							"host": [
+								"{{LOCALHOST}}"
+							],
+							"path": [
+								"clientes",
+								"{{idCliente}}",
+								"dados-bancarios",
+								"{{idDadoBancario}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exclui Um Dado Bancario Cliente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCALHOST}}/clientes/{{idCliente}}/dados-bancarios/b8792117-1171-4a5e-8941-981972aee203",
+							"host": [
+								"{{LOCALHOST}}"
+							],
+							"path": [
+								"clientes",
+								"{{idCliente}}",
+								"dados-bancarios",
+								"b8792117-1171-4a5e-8941-981972aee203"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Salva Dados Bancarios Cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"agencia\": \"8921\",\n    \"conta\": \"211\",\n    \"banco\": \"012\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCALHOST}}/clientes/{{idCliente}}/dados-bancarios",
+							"host": [
+								"{{LOCALHOST}}"
+							],
+							"path": [
+								"clientes",
+								"{{idCliente}}",
+								"dados-bancarios"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "LOCALHOST",
+			"value": "localhost:8080",
+			"type": "default"
+		},
+		{
+			"key": "idCliente",
+			"value": "879bfe49-d373-49ce-922c-bf4833543353"
+		},
+		{
+			"key": "idDadoBancario",
+			"value": "ae0fc710-191d-4db5-a759-d60327d73568"
+		}
+	]
+}
