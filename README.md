@@ -10,8 +10,7 @@ Para visualizar a documentacao da api, acesse: http://localhost:8080/swagger-ui/
 - Spring
 - Bean Validation
 - JUnit
-- H2 Database
-  O H2 Database trata-se de um banco de dados relacional escrito em Java. Ele foi escolhido pela facilidade de construir e rodar o banco junto com o aplicativo, pois, uma vez configurado, ele sobe e está acessível junto da aplicação.
+- H2 Database: Trata-se de um banco de dados relacional escrito em Java. Ele foi escolhido pela facilidade de construir e rodar o banco junto com o aplicativo, pois, uma vez configurado, ele sobe e está acessível junto da aplicação.
 
 
 ## Execução
